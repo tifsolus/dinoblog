@@ -2,7 +2,7 @@
 @Program: urls
 @Author: Donald Osgood
 @Last Date: 2023-11-18 21:42:12
-@Purpose:Donald Osgood
+@Purpose: Set post url path as default
 """
 from django.urls import path
 from . import views

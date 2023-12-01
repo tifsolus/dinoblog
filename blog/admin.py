@@ -2,7 +2,7 @@
 @Program: admin
 @Author: Donald Osgood
 @Last Date: 2023-11-18 19:14:16
-@Purpose:Donald Osgood
+@Purpose: Django Admin Plugin
 '''
 from django.contrib import admin
 
