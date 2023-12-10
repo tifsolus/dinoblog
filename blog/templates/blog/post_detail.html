@@ -2,25 +2,54 @@
   @Author: Donald Osgood
   @Date:   2023-12-09 19:14:19
   @Last Modified by:   Donald Osgood
-  @Last Modified time: 2023-12-09 20:38:07
+  @Last Modified time: 2023-12-10 13:51:37
 -->
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
     <article class="post">
-        {% if post.published_date %}
-            <time class="date">
-                {{ post.published_date }}
-            </time>
-        {% endif %}
+        {% if post.published_date  %}
+        <div class="date">
+            {{ post.published_date }}
+        </div>
+    {% elif user.is_authenticated %}
+        <a class="" href="{% url 'post_publish' pk=post.pk %}">Publish
+            <i class="text-primary bi bi-file-post fs-4"></i>
+        </a>
+    {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
         <aside class="actions">
             {% if user.is_authenticated %}
-            <a class="btn btn-secondary" href="{% url 'post_edit' pk=post.pk %}">
-                <img src="{% static 'icon/pencil-fill.svg' %}">
+            <a class="" href="{% url 'post_edit' pk=post.pk %}">
+                <i class="text-primary bi bi-pen fs-4"></i>
             </a>
-            {% end if%}
+            <a class="" href="{% url 'post_remove' pk=post.pk %}">
+                <i class="text-primary bi bi-trash fs-4"></i></a>
+            {% endif%}
         </aside>
+        <hr>
+        <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+        {% for comment in post.comments.all %}
+        {% if user.is_authenticated or comment.approved_comment %}
+        <div class="comment">
+            <div class="date">
+                {{ comment.created_date }}
+                {% if not comment.approved_comment %}
+                    <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}">
+                        <i class="bi bi-hand-thumbs-down fs-4"></i>
+                    </a>
+                    <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}">
+                        <i class="bi bi-hand-thumbs-up fs-4"></i>
+                    </a>
+                {% endif %}
+            </div>
+            <strong>{{ comment.author }}</strong>
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+        {% endif %}
+    {% empty %}
+        <p>No comments here yet :(</p>
+    {% endfor %}
     </article>
 {% endblock %}

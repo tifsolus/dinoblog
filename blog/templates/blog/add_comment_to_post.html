@@ -1,0 +1,15 @@
+<!-- 
+  @Author: Donald Osgood
+  @Date:   2023-12-10 13:48:07
+  @Last Modified by:   Donald Osgood
+  @Last Modified time: 2023-12-10 13:48:14
+-->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>New comment</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>
+{% endblock %}

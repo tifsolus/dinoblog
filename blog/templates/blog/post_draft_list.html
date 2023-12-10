@@ -1,0 +1,17 @@
+<!-- 
+  @Author: Donald Osgood
+  @Date:   2023-12-09 22:51:21
+  @Last Modified by:   Donald Osgood
+  @Last Modified time: 2023-12-09 22:51:26
+-->
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <p class="date">created: {{ post.created_date|date:'d-m-Y' }}</p>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|truncatechars:200 }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
