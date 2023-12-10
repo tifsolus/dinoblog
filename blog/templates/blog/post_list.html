@@ -2,7 +2,7 @@
   @Author: Donald Osgood
   @Date:   2023-11-18 21:46:26
   @Last Modified by:   Donald Osgood
-  @Last Modified time: 2023-11-18 22:58:59
+  @Last Modified time: 2023-12-09 18:33:17
 -->
 {% extends 'blog/base.html' %}
 {% block content %}
@@ -11,7 +11,7 @@
             <time class="date">
                 {{ post.published_date }}
             </time>
-            <h2><a href="">{{ post.title }}</a></h2>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p>{{ post.text|linebreaksbr }}</p>
         </article>
     {% endfor %}
