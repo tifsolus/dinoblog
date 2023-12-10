@@ -2,7 +2,7 @@
   @Author: Donald Osgood
   @Date:   2023-11-18 22:49:49
   @Last Modified by:   Donald Osgood
-  @Last Modified time: 2023-12-09 18:49:28
+  @Last Modified time: 2023-12-09 20:36:37
 -->
 {% load static %}
 <!DOCTYPE html>
@@ -18,9 +18,11 @@
             <header class="page-header">
               <div class="container">
                   <h1><a href="/">Django Girls Blog</a></h1>
+                  '{% if user.is_authenticated %}'
                   <a href="{% url 'post_new' %}" class="top-menu">
                     <img src="{% static 'icon/file-earmark-plus.svg' %}">
                                </a>
+                               {% endif %}
               </div>
             </header>
             <main class="container">
